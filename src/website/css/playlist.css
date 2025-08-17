@@ -184,16 +184,14 @@
     background: var(--primary-color);
 }
 
-/* Update the main layout to accommodate the playlist */
+/* Keep main layout compact - no padding */
 .spessasynth_main {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-right: 360px; /* Make space for playlist */
-    box-sizing: border-box;
 }
 
-/* Adjust top part to not overlap with playlist */
+/* Keep top part compact and centered */
 .top_part {
     --top-part-border-radius: 1.2rem;
     position: relative;
@@ -209,7 +207,7 @@
     transform-origin: top;
     transform: scaleY(1);
     transition: var(--hide-top-duration) ease;
-    margin-right: 360px; /* Avoid playlist overlap */
+    max-width: calc(100% - 360px); /* Limit width instead of margin */
 }
 
 /* Make title more compact */
@@ -251,29 +249,20 @@
     position: relative;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments - keep UI compact */
 @media (max-width: 1400px) {
-    .spessasynth_main {
-        padding-right: 340px;
-    }
-    
     .top_part {
-        margin-right: 340px;
+        max-width: calc(100% - 320px);
     }
     
     #playlist-container {
         width: 300px;
-        right: 15px;
     }
 }
 
 @media (max-width: 1200px) {
-    .spessasynth_main {
-        padding-right: 0;
-    }
-    
     .top_part {
-        margin-right: 0;
+        max-width: 100%;
     }
     
     #playlist-container {
@@ -306,16 +295,6 @@
         left: 20px;
         height: 250px;
         max-height: 35vh;
-    }
-    
-    #playlist-container h2 {
-        font-size: 1.2rem;
-        margin-bottom: 15px;
-    }
-    
-    .folder-upload-btn {
-        padding: 8px 16px;
-        font-size: 0.9rem;
     }
 }
 
