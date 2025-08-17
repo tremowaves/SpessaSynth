@@ -4,6 +4,7 @@ import { Manager } from "../manager/manager.js";
 import { showNotification } from "../notification/notification.js";
 import { LocaleManager } from "../locale/locale_manager.js";
 import { SpessaSynthLogging } from "spessasynth_core";
+import { PlaylistManager } from "../playlist/playlist_manager.js";
 
 /**
  * local_main.js
@@ -33,6 +34,9 @@ let exportButton = document.getElementById("export_button");
 exportButton.style.display = "none";
 
 let synthReady = false;
+
+// Initialize playlist manager
+let playlistManager = null;
 
 const r = await (await fetch("/getversion")).text();
 window.SPESSASYNTH_VERSION = r;
@@ -177,6 +181,12 @@ async function replaceFont(fontName)
         }
         titleMessage.innerText = window.manager.localeManager.getLocaleString("locale.titleMessage");
         synthReady = true;
+        
+        // Initialize playlist manager if not already done
+        if (!playlistManager && window.manager) {
+            playlistManager = new PlaylistManager();
+            playlistManager.setManager(window.manager);
+        }
     }
     
     titleMessage.innerText = "Loading soundfont...";
@@ -216,6 +226,12 @@ document.body.onclick = async () =>
             manager.synth.setLogLevel(true, true, true, true);
             synthReady = true;
             titleMessage.innerText = window.manager.localeManager.getLocaleString("locale.titleMessage");
+            
+            // Initialize playlist manager with the manager instance
+            if (!playlistManager) {
+                playlistManager = new PlaylistManager();
+                playlistManager.setManager(window.manager);
+            }
         }
     }
     document.body.onclick = null;
@@ -274,6 +290,12 @@ fetch("soundfonts").then(async r =>
     
     // fetch the first sf2
     await replaceFont(soundFonts[0].name);
+    
+    // Initialize playlist manager after soundfont is loaded
+    if (window.manager && !playlistManager) {
+        playlistManager = new PlaylistManager();
+        playlistManager.setManager(window.manager);
+    }
     
     // start midi if already uploaded
     if (fileInput.files[0])

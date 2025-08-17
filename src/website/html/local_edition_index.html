@@ -116,6 +116,27 @@
     <div class='notification_field'></div>
     <div class='ass_renderer_field'></div>
 </div>
+
+<!-- Playlist Panel -->
+<div id="playlist-container">
+    <h2>Playlist</h2>
+    <div class="playlist-info">
+        <span id="playlist-count">0 bài hát</span>
+        <span id="current-track">Không có bài nào đang phát</span>
+    </div>
+    <div class="playlist-controls">
+        <label for="folder-input" class="folder-upload-btn">Chọn thư mục MIDI</label>
+        <input type="file" id="folder-input" webkitdirectory directory multiple style="display: none;">
+        <div class="playlist-buttons">
+            <button id="prev-btn" class="playlist-btn" title="Bài trước (Ctrl + ←)">⏮</button>
+            <button id="next-btn" class="playlist-btn" title="Bài tiếp (Ctrl + →)">⏭</button>
+            <button id="clear-btn" class="playlist-btn" title="Xóa playlist">🗑</button>
+        </div>
+    </div>
+    <ul id="playlist">
+        <!-- Playlist items will be added here dynamically -->
+    </ul>
+</div>
 <script src='./local_main.js' type='module'></script> <!-- Here the magic happens ;) -->
 </body>
 </html>

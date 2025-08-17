@@ -8,6 +8,7 @@
 @import "note_canvas.css";
 @import "top_part.css";
 @import "keyboard_canvas_wrapper.css";
+@import "playlist.css";
 
 * {
     /*global variables*/
